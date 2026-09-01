@@ -13,8 +13,10 @@ in the top-level `README.md`:
 python scripts/verify_setup.py
 ```
 
-It loads configuration, makes one real Groq call (with reasoning suppressed via
-`include_reasoning=false`), and prints the response, token counts, and latency.
+It builds a `GroqProvider` (the same abstraction the application uses, so it
+also validates the provider layer, its OS-trust-store TLS handling, and retry
+config) and makes one real call with reasoning suppressed, then prints the
+response, token counts, and latency.
 
 Exit codes:
 
@@ -26,6 +28,5 @@ Exit codes:
 | 3 | Network / TLS failure — could not reach Groq |
 | 4 | Request rejected — invalid key, or the URL is blocked by a web filter |
 
-Note: this script calls the Groq SDK **directly** to test the raw connection.
-Application classification goes through the `LLMProvider` abstraction in
-`app/llm_provider.py`, not through this script.
+Note: this script goes through `GroqProvider` in `app/llm_provider.py` — the
+only module that imports the `groq` SDK. It does not import the SDK itself.
