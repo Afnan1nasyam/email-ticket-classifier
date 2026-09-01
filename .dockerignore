@@ -1,0 +1,19 @@
+# Never ship secrets or local-only artifacts into the image.
+.env
+.env.*
+!.env.example
+venv/
+__pycache__/
+*.pyc
+
+# Not needed at runtime.
+tests/
+evals/
+data/
+scripts/
+.git/
+.gitignore
+*.md
+CLAUDE.local.md
+PLAN.local.md
+PROMPTS.md
