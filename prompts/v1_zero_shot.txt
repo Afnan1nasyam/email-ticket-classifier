@@ -1,0 +1,16 @@
+Classify the customer support email below into exactly one of these categories.
+
+Categories:
+{categories}
+
+Instructions:
+- Choose the single best-fitting category from the list above.
+- Decide using only the category definitions given.
+
+Respond with exactly one JSON object and nothing else, in this form:
+{{"label": "<one of: {labels}>", "confidence": <number from 0.0 to 1.0>, "reasoning": "<one short sentence explaining the choice>"}}
+
+Email:
+"""
+{email}
+"""

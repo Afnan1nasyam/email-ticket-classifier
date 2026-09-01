@@ -65,10 +65,13 @@ CATEGORIES: dict[str, str] = {
         "problem is with people or process, not a product defect. About how the "
         "sender was treated, not about a broken feature."
     ),
+    # Base definition only — kept free of the precedence-rule wording so v1 (which
+    # renders these definitions) has no tiebreak rule. The overlap tiebreak lives
+    # in URGENT_PRECEDENCE_RULE and enters the prompt at v3.
     "urgent": (
-        "Time-critical business impact or a hard deadline. This category "
-        "deliberately overlaps the topical ones; resolve every overlap with the "
-        "precedence rule, which is authoritative: " + URGENT_PRECEDENCE_RULE
+        "Time-critical business impact or an explicit near-term deadline — a "
+        "request that genuinely cannot wait. Can overlap the topical categories "
+        "when a message is both time-critical and about a specific topic."
     ),
     "feedback": (
         "Suggestions, feature requests, and praise, offered constructively — no "
@@ -77,12 +80,13 @@ CATEGORIES: dict[str, str] = {
         "redress for something that went wrong. Forward-looking or positive, not "
         "a demand for resolution."
     ),
+    # Last-resort fallback, not a tiebreaker: genuine overlaps are resolved by
+    # the topical definitions and the urgent rule, not by falling back to general.
     "general": (
         "Everything that does not clearly fit another category: greetings, "
-        "account questions with no billing angle, ambiguous or mixed-topic "
-        "messages, and the low-confidence fallback. Use general only when no "
-        "other category clearly applies — it is the last resort, not a tie "
-        "resolver (topical precedence and the urgent rule resolve ties first)."
+        "account or policy questions with no billing angle, ambiguous or "
+        "mixed-topic messages, and the low-confidence fallback. Use only when no "
+        "other category clearly applies."
     ),
 }
 
