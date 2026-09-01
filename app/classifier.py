@@ -109,7 +109,24 @@ class TicketClassifier:
             `config.CATEGORIES`.
         """
         cleaned = self.preprocessor.preprocess_one(text)
-        system_prompt, user_message = self.prompt_builder.build(cleaned, template=self.template)
+        return self.classify_preprocessed(cleaned)
+
+    def classify_preprocessed(self, clean_text: str) -> ClassificationResult:
+        """Classify an already-preprocessed email body.
+
+        The API path (`classify`) preprocesses then delegates here; the eval
+        runner calls this directly on `EmailPreprocessor.preprocess_batch`
+        output. Both therefore share the identical prompt -> provider -> parse
+        -> validate path with a single preprocessing step.
+
+        Args:
+            clean_text: cleaned/truncated email body.
+
+        Returns:
+            A `ClassificationResult` whose label is always one of
+            `config.CATEGORIES`.
+        """
+        system_prompt, user_message = self.prompt_builder.build(clean_text, template=self.template)
         response = self.provider.complete(system_prompt, user_message)
 
         parsed = self._extract_json(response.text)
