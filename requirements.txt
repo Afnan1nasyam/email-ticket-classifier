@@ -3,3 +3,4 @@ flask
 python-dotenv
 pandas>=3,<4
 pytest
+truststore

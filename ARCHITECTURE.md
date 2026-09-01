@@ -115,6 +115,9 @@ email-ticket-classifier/
 │   ├── test_preprocessor.py
 │   ├── test_classifier.py
 │   └── test_api.py
+├── scripts/
+│   ├── verify_setup.py             permanent connectivity check (Phase 1)
+│   └── README.md
 ├── run.py                          dev entrypoint
 ├── requirements.txt
 ├── .env.example
