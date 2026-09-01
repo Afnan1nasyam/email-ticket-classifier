@@ -60,7 +60,9 @@ later phase fails too, and the cause will be much harder to see.
 Built here, before any prompt exists, so label independence is structural (see
 the ordering note at the top). Use the `dataset-builder` subagent.
 
-- [ ] `data/test_dataset.csv` with columns `id, email_text, true_label, difficulty`
+- [ ] `data/test_dataset.csv` with columns `id, email_text, true_label, label_rationale, difficulty`
+      (`label_rationale`: one concise, config-derived justification per row; the
+      eval sends only `email_text`, never the rationale or label)
 - [ ] ~80 rows, roughly balanced across the six categories
 - [ ] Difficulty mix: about 50% `easy`, 35% `medium`, 15% `hard`
 - [ ] `hard` cases include: billing-and-urgent overlap, complaint-vs-feedback

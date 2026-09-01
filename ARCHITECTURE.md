@@ -102,7 +102,7 @@ email-ticket-classifier/
 │   ├── v3_few_shot_with_rules.txt
 │   └── ACTIVE.txt                  copy of the winning version
 ├── data/
-│   ├── test_dataset.csv            email_text, true_label, difficulty
+│   ├── test_dataset.csv            id, email_text, true_label, label_rationale, difficulty
 │   └── README.md                   provenance and known limitations
 ├── evals/
 │   ├── run_eval.py                 CLI eval runner
