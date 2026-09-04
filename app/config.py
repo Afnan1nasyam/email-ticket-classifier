@@ -147,7 +147,7 @@ MAX_EMAIL_TOKENS: int = 512
 # Prompt template the classifier uses by default (the API path). The eval runner
 # overrides this per run via --prompt. Updated to the winning version (copied to
 # ACTIVE.txt) at the end of Phase 8; until then the v1 baseline.
-ACTIVE_PROMPT_TEMPLATE: str = "v1_zero_shot.txt"
+ACTIVE_PROMPT_TEMPLATE: str = "ACTIVE.txt"
 
 
 # --------------------------------------------------------------------------- #

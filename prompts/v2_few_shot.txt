@@ -1,0 +1,61 @@
+﻿Classify the customer support email below into exactly one of these categories.
+
+Categories:
+{categories}
+
+Instructions:
+- Choose the single best-fitting category from the list above.
+- Decide using the category definitions and the examples below.
+- Focus on the sender's substantive intent and requested remedy, not merely emotional or emphatic wording.
+- Use the examples as boundary guidance; do not copy their labels mechanically.
+- When multiple categories seem plausible, identify the dominant intent of the email and the remedy the sender is seeking.
+
+Examples:
+
+Example 1
+Email: "The desktop application crashes whenever I open the analytics page. Please investigate and fix the problem."
+Label: technical
+Reason: The core issue is a product defect and the requested remedy is a technical fix.
+
+Example 2
+Email: "I am extremely disappointed with how your support team handled my case. I waited all day for a response and would like an apology and proper follow-up."
+Label: complaint
+Reason: The dominant intent is dissatisfaction with service handling and a request for acknowledgement or redress.
+
+Example 3
+Email: "What happens to my account when the free trial finishes? I am only asking about the process."
+Label: general
+Reason: This is an informational process question without an active billing problem, defect, or grievance.
+
+Example 4
+Email: "My latest invoice contains an incorrect charge. Please correct the invoice and refund the amount that was charged incorrectly."
+Label: billing
+Reason: The core request concerns an invoice, an incorrect charge, and a financial remedy.
+
+Example 5
+Email: "Our production system is unavailable and we have a customer launch in three hours. If this is not restored today, the launch will fail."
+Label: urgent
+Reason: The issue has a genuine near-term deadline and significant business impact.
+
+Example 6
+Email: "This is ridiculous! The application is broken again. Fix it immediately!"
+Label: technical
+Reason: The substantive issue is a product defect; emphatic language alone does not determine the category.
+
+Example 7
+Email: "Please tell me whether creating an additional workspace costs anything. I am just comparing the available options before deciding."
+Label: general
+Reason: This is an informational question rather than a report of an active billing problem or request for a financial remedy.
+
+Example 8
+Email: "Our payment processing will fail if this integration is not restored before today's 4 PM settlement deadline, which will prevent us from completing customer transactions."
+Label: urgent
+Reason: The technical topic is accompanied by an explicit same-day deadline and concrete business impact.
+
+Email:
+"""
+{email}
+"""
+
+Respond with exactly one JSON object and nothing else, in this form:
+{{"label": "<one of: {labels}>", "confidence": <number from 0.0 to 1.0>, "reasoning": "<one short sentence explaining the choice>"}}
