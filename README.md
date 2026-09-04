@@ -153,12 +153,13 @@ All errors are JSON (never an HTML traceback):
 Accuracy is measured against a held-out labeled dataset
 (`data/test_dataset.csv`, 81 synthetic emails; see `data/README.md` for
 provenance and caveats), using the same classifier the API uses. Runs are
-deliberately throttled to respect Groq's free-tier token limit and take
-10–15 minutes for the full set.
+deliberately throttled to respect Groq's free-tier token limit; the full-set
+runs took roughly 13–17 minutes depending on prompt length.
 
 ```
 python evals/run_eval.py --prompt prompts/v1_zero_shot.txt
-python evals/run_eval.py --prompt prompts/v3_few_shot_with_rules.txt --reasoning-effort medium
+python evals/run_eval.py --prompt prompts/v2_few_shot.txt
+python evals/run_eval.py --prompt prompts/v3_precedence.txt
 ```
 
 Each run writes a JSON record to `evals/results/` and appends a dated entry to
@@ -167,14 +168,14 @@ version and its measured accuracy).
 
 ### Results
 
-Measured at `temperature=0` on the ~81-example set; a point estimate that may
-vary a few points on re-run. **Numbers are filled in after the eval runs.**
+Measured at `temperature=0` on all 81 examples. These are point estimates on
+this synthetic evaluation set and may vary on re-run.
 
 | Prompt version | Sample size | Accuracy | Macro F1 | Notes |
 |---|---|---|---|---|
-| v1 (zero-shot baseline) | TBD | TBD | TBD | category definitions only |
-| v2 (few-shot) | TBD | TBD | TBD | + examples targeting v1's confusions |
-| v3 (few-shot + rules) | TBD | TBD | TBD | + explicit urgent precedence rule |
+| v1 (zero-shot baseline) | 81 | 95.1% | 0.952 | category definitions only |
+| v2 (few-shot) | 81 | 98.8% | 0.988 | + examples targeting v1's confusions |
+| v3 (few-shot + rules) | 81 | 100.0% | 1.000 | + explicit urgent precedence rule |
 
 ---
 
@@ -210,7 +211,7 @@ via an environment variable (on Render, set it in the dashboard).
 - **Synthetic dataset.** No public dataset maps onto these six categories; the
   set was written and hand-labeled for this project, and deliberately includes
   ambiguous and adversarial cases. It approximates, but is not, real support mail.
-- **Small sample (~81 rows).** Accuracy is indicative, not statistically tight;
+- **Small sample (81 rows).** Accuracy is indicative, not statistically tight;
   per-category slices have wide confidence intervals.
 - **Single-label, single-turn.** One label per email, no conversation context,
   no multi-label output. Priority would be a separate dimension in production.
