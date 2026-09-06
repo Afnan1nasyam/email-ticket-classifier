@@ -4,7 +4,8 @@ An AI-powered email/ticket classification system: a Flask REST API that accepts
 raw customer email text and returns a support category, using a hosted LLM
 (Groq, `openai/gpt-oss-120b`) for classification. Stateless, no database, no UI.
 
-**Live URL:** _TBD — deployed to Render after the evaluation runs._
+**Live URL:** https://email-ticket-classifier.onrender.com
+> Free tier: cold starts after idle take 30–50 seconds. First request may be slow; subsequent requests are fast.
 
 Categories: `billing`, `technical`, `complaint`, `urgent`, `feedback`,
 `general` (the last also serves as the low-confidence fallback).
