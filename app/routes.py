@@ -25,6 +25,78 @@ def _error(status: int, message: str) -> tuple[Response, int]:
     return jsonify({"error": message, "status": status}), status
 
 
+@api_bp.get("/")
+def index() -> Response:
+    """Simple landing page describing the API."""
+    return Response(
+        """<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Email Ticket Classifier API</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            max-width: 760px;
+            margin: 60px auto;
+            padding: 0 24px;
+            line-height: 1.6;
+            color: #1f2937;
+        }
+        h1 { margin-bottom: 8px; }
+        .subtitle { color: #6b7280; }
+        code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .endpoint {
+            border-left: 3px solid #d1d5db;
+            padding-left: 16px;
+            margin: 20px 0;
+        }
+        .method {
+            font-weight: 700;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Email Ticket Classifier API</h1>
+    <p class="subtitle">
+        AI-powered customer email classification using
+        <code>openai/gpt-oss-120b</code>.
+    </p>
+
+    <h2>Available endpoints</h2>
+
+    <div class="endpoint">
+        <span class="method">GET</span>
+        <code>/health</code>
+        <p>Check API health, model status, and application version.</p>
+    </div>
+
+    <div class="endpoint">
+        <span class="method">POST</span>
+        <code>/classify</code>
+        <p>
+            Classify an email into
+            <code>billing</code>, <code>technical</code>,
+            <code>complaint</code>, <code>urgent</code>,
+            <code>feedback</code>, or <code>general</code>.
+        </p>
+    </div>
+
+    <h2>Example request</h2>
+    <pre><code>{
+  "email_text": "I was charged twice for my invoice."
+}</code></pre>
+</body>
+</html>""",
+        mimetype="text/html",
+    )
+
 @api_bp.get("/health")
 def health() -> Response:
     """Liveness/readiness check. Does not call the LLM."""
